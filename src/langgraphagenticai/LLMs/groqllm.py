@@ -2,25 +2,19 @@ import os
 import streamlit as st
 from langchain_groq import ChatGroq
 
-
 class GroqLLM:
-    def __init__(self, user_control_inputs):
-        self.user_control_inputs = user_control_inputs
+    def __init__(self,user_contols_input):
+        self.user_controls_input=user_contols_input
 
-
-    def load_llm(self):
+    def get_llm_model(self):
         try:
-            api_key = self.user_control_inputs["GROQ_API_KEY"]
-            llm_model = self.user_control_inputs["MODEL_OPTIONS"]
-            if api_key == "" or os.environ["GROQ_API_KEY"] == "":
-                st.error("Please enter the API KEY")
+            groq_api_key=self.user_controls_input["GROQ_API_KEY"]
+            selected_groq_model=self.user_controls_input["MODEL_OPTIONS"]
+            if groq_api_key=='' and os.environ["GROQ_API_KEY"] =='':
+                st.error("Please Enter the Groq API KEY")
 
-            llm = ChatGroq(
-                api_key=api_key,
-                model=llm_model
-            )
+            llm=ChatGroq(api_key=groq_api_key,model=selected_groq_model)
 
         except Exception as e:
-            raise ValueError(f"Error occured with exception {e}")
-        
-        return llm 
+            raise ValueError(f"Error Ocuured With Exception in GroqLLM: {e}")
+        return llm

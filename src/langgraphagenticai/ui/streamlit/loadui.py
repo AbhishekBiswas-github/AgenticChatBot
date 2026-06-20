@@ -24,7 +24,7 @@ class LoadUI:
             if self.userControls["LLM_OPTION"] == "Groq":
                 model_options = self.config.get_llm_models()
                 self.userControls["MODEL_OPTIONS"] = st.selectbox("SELECT MODEL", model_options)
-                self.userControls["GROQ_API_KEY"] = st.text_input("API KEY", type="password")
+                self.userControls["GROQ_API_KEY"] = st.session_state["GROQ_API_KEY"]=st.text_input("API Key",type="password")
                 if not self.userControls["GROQ_API_KEY"]:
                     st.warning("⚠️ To get an API KEY, visit https://console.groq.com. ")
 
